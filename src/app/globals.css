@@ -1,0 +1,73 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Light mode palette */
+  --background: #faf6f0; /* primary background */
+  --background-secondary: #f0ebe1;
+  --background-tertiary: #e8e0d4;
+
+  --card: #fffdf9;
+  --card-foreground: #2c2418;
+
+  --foreground: #2c2418; /* primary text */
+  --muted-foreground: #7a6e5d; /* secondary text */
+  --tertiary-foreground: #a69c8c; /* tertiary text */
+
+  --accent: #d4622b;
+  --accent-hover: #bf5623;
+  --accent-soft: rgba(212, 98, 43, 0.1);
+
+  --border: rgba(44, 36, 24, 0.1);
+  --input: rgba(44, 36, 24, 0.1);
+
+  --radius: 0.9rem;
+}
+
+.dark {
+  /* Dark mode palette */
+  --background: #1a1714;
+  --background-secondary: #242019;
+  --background-tertiary: #2e2a22;
+
+  --card: #242019;
+  --card-foreground: #f0ebe1;
+
+  --foreground: #f0ebe1;
+  --muted-foreground: #b0a794;
+  --tertiary-foreground: #7a6e5d;
+
+  --accent: #e8793f;
+  --accent-hover: #f08a52;
+  --accent-soft: rgba(232, 121, 63, 0.14);
+
+  --border: rgba(240, 235, 225, 0.1);
+  --input: rgba(240, 235, 225, 0.1);
+
+  --radius: 0.9rem;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    @apply transition-colors duration-300;
+  }
+
+  :root {
+    color-scheme: light;
+  }
+
+  .dark {
+    color-scheme: dark;
+  }
+}
+
