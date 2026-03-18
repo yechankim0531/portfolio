@@ -7,7 +7,16 @@ interface ProjectCardProps {
 
 export function ProjectCard({ project }: ProjectCardProps) {
   return (
-    <article className="group flex flex-col overflow-hidden rounded-2xl border border-border/70 bg-card shadow-[0_18px_40px_rgba(0,0,0,0.04)] transition-transform transition-shadow duration-150 hover:-translate-y-1 hover:shadow-[0_22px_50px_rgba(0,0,0,0.08)]">
+    <article className="group relative flex flex-col overflow-hidden rounded-2xl border border-border/70 bg-card shadow-[0_18px_40px_rgba(0,0,0,0.04)] transition-transform transition-shadow duration-150 hover:-translate-y-1 hover:shadow-[0_22px_50px_rgba(0,0,0,0.08)]">
+      {/* Stretched link covers the whole card — sits below the action row */}
+      {project.slug && (
+        <Link
+          href={`/projects/${project.slug}`}
+          className="absolute inset-0 z-0"
+          aria-label={`View ${project.title}`}
+        />
+      )}
+
       <div className="relative border-b border-border/60 bg-[color:var(--background-secondary)]">
         <div className="flex aspect-video items-center justify-center text-xs text-tertiary-foreground">
           Project thumbnail
@@ -40,11 +49,13 @@ export function ProjectCard({ project }: ProjectCardProps) {
       </div>
 
       {(project.liveUrl || project.githubUrl) && (
-        <div className="flex items-center justify-between border-t border-border/60 px-5 py-3 text-[0.75rem] font-medium text-accent">
+        <div className="relative z-10 flex items-center justify-between border-t border-border/60 px-5 py-3 text-[0.75rem] font-medium text-accent">
           <div className="flex gap-4">
             {project.liveUrl && (
               <Link
                 href={project.liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="transition-colors duration-150 hover:text-[color:var(--accent-hover)]"
               >
                 Live demo ↗
@@ -53,6 +64,8 @@ export function ProjectCard({ project }: ProjectCardProps) {
             {project.githubUrl && (
               <Link
                 href={project.githubUrl}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="transition-colors duration-150 hover:text-[color:var(--accent-hover)]"
               >
                 Source code ↗
@@ -64,4 +77,3 @@ export function ProjectCard({ project }: ProjectCardProps) {
     </article>
   );
 }
-

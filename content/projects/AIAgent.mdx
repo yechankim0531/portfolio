@@ -1,0 +1,45 @@
+---
+title: "AIAgent"
+subtitle: "A real-time collaborative task manager with drag-and-drop boards, team workspaces, and analytics dashboards."
+date: "2024-11-01"
+role: "Full-Stack Engineer"
+tags: ["Next.js", "TypeScript", "PostgreSQL", "Socket.io"]
+liveUrl: "https://example.com"
+githubUrl: "https://github.com/yechankim0531"
+highlights:
+  - title: "Real-time sync"
+    description: "Socket.io rooms broadcast board mutations to all connected clients in under 50ms, with optimistic UI updates for instant feedback."
+  - title: "Drag-and-drop engine"
+    description: "Built a custom DnD layer on top of the Pointer Events API—no library dependencies—supporting touch, mouse, and keyboard navigation."
+  - title: "Row-level security"
+    description: "PostgreSQL RLS policies ensure each workspace is fully isolated at the database layer, not just in application logic."
+  - title: "Analytics pipeline"
+    description: "Nightly aggregation jobs compute velocity metrics and burn-down data, stored in a materialized view for fast dashboard queries."
+---
+
+## Overview
+
+TaskFlow started as a weekend experiment to see whether a genuinely fast, keyboard-first task board was possible in the browser. It grew into a full product with workspaces, team invites, and a lightweight analytics layer.
+
+The core insight driving the design is that **most project-management tools are optimized for managers, not makers**. TaskFlow flips that: the default view is a focused personal queue, and the board is one click away when you need the big picture.
+
+## The problem
+
+Existing tools like Jira and Linear are powerful but slow. Opening a ticket, updating a status, or moving a card between columns often requires three or four interactions. For engineers doing this fifty times a day, the friction adds up.
+
+## Architecture
+
+The app is a Next.js 14 monolith with an App Router front-end and an API layer that speaks directly to PostgreSQL via `pg`. WebSocket state is managed by a small Socket.io server running as a Next.js custom server.
+
+```
+client → Next.js API route → PostgreSQL (RLS enforced)
+                          ↘ Socket.io broadcast → other clients
+```
+
+One deliberate constraint: **no ORM**. Raw SQL is easier to reason about for complex permission queries, and PostgreSQL's query planner handles the rest.
+
+## What I learned
+
+Building the real-time sync layer exposed a class of bugs I hadn't encountered before: events arriving out of order, duplicate broadcasts when a client reconnects mid-operation, and stale reads racing against in-flight mutations.
+
+The solution was a simple version vector attached to each board. Clients reject events with a lower version than their local state, and request a full snapshot when they detect a gap.

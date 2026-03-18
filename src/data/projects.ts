@@ -1,4 +1,5 @@
 export interface Project {
+  slug?: string;
   title: string;
   description: string;
   tags: string[];
@@ -10,6 +11,7 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    slug: "taskflow",
     title: "TaskFlow — Project Management App",
     description:
       "A real-time collaborative task manager with drag-and-drop boards, team workspaces, and analytics dashboards.",

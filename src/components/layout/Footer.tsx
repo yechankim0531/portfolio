@@ -1,11 +1,11 @@
 import Link from "next/link";
-import { Github, Linkedin, Twitter } from "lucide-react";
+import { Github, Linkedin, Instagram } from "lucide-react";
 import { siteConfig } from "../../data/siteConfig";
 
 const socials = [
   { name: "GitHub", href: siteConfig.socials.github, Icon: Github },
   { name: "LinkedIn", href: siteConfig.socials.linkedin, Icon: Linkedin },
-  { name: "Twitter", href: siteConfig.socials.twitter, Icon: Twitter },
+  { name: "Instagram", href: siteConfig.socials.instagram, Icon: Instagram },
 ];
 
 export default function Footer() {

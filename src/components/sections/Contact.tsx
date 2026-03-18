@@ -1,7 +1,13 @@
 import Link from "next/link";
-import { Github, Linkedin, Twitter } from "lucide-react";
+import { Github, Linkedin, Instagram } from "lucide-react";
 import { SectionFadeIn } from "./SectionFadeIn";
 import { siteConfig } from "../../data/siteConfig";
+
+const socials = [
+  { name: "GitHub", href: siteConfig.socials.github, Icon: Github },
+  { name: "LinkedIn", href: siteConfig.socials.linkedin, Icon: Linkedin },
+  { name: "Instagram", href: siteConfig.socials.instagram, Icon: Instagram },
+] as const;
 
 export default function Contact() {
   return (
@@ -37,15 +43,7 @@ export default function Contact() {
             </div>
 
             <div className="mt-7 flex items-center justify-center gap-3">
-              {[
-                { name: "GitHub", href: siteConfig.socials.github, Icon: Github },
-                {
-                  name: "LinkedIn",
-                  href: siteConfig.socials.linkedin,
-                  Icon: Linkedin,
-                },
-                { name: "Twitter", href: siteConfig.socials.twitter, Icon: Twitter },
-              ].map(({ name, href, Icon }) => (
+              {socials.map(({ name, href, Icon }) => (
                 <Link
                   key={name}
                   href={href}

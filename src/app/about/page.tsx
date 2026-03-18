@@ -205,7 +205,7 @@ export default function AboutA() {
   {/* PDF preview */}
   <div className="mt-8 overflow-hidden rounded-2xl border border-border/60 bg-card">
     <iframe
-      src="/resume.pdf#view=FitH"
+      src="/Yechan_Kim_SWE.pdf"
       title="Resume preview"
       className="h-[600px] w-full"
     />
