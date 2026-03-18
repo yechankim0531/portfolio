@@ -6,7 +6,7 @@ import Skills from "@/components/sections/Skills";
 import Contact from "@/components/sections/Contact";
 import { getAllProjects } from "@/lib/projects";
 
-const HOME_PROJECT_SLUGS = ["taskflow"];
+const HOME_PROJECT_SLUGS = ["HoosTogether"];
 
 export default function HomePage() {
   const allProjects = getAllProjects();

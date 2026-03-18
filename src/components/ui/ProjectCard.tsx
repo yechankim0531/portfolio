@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import type { ProjectMeta } from "@/lib/projects";
 
 interface ProjectCardProps {
@@ -18,13 +19,19 @@ export function ProjectCard({ project }: ProjectCardProps) {
       )}
 
       <div className="relative border-b border-border/60 bg-[color:var(--background-secondary)]">
-        <div className="flex aspect-video items-center justify-center text-xs text-tertiary-foreground">
-          Project thumbnail
-        </div>
-        {(
-          <span className="absolute left-3 top-3 rounded-full bg-accent px-3 py-1 text-[0.65rem] font-medium uppercase tracking-[0.16em] text-white shadow-sm">
-            Featured
-          </span>
+        {project.heroImage ? (
+          <Image
+            src={project.heroImage}
+            alt={project.title}
+            width={1200}
+            height={675}
+            className="aspect-video w-full object-cover"
+            priority
+          />
+        ) : (
+          <div className="flex aspect-video items-center justify-center text-xs text-tertiary-foreground">
+            Project thumbnail
+          </div>
         )}
       </div>
 

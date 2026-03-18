@@ -8,7 +8,6 @@ export interface ProjectFrontmatter {
   title: string;
   subtitle?: string;
   date: string;
-  role?: string;
   tags: string[];
   liveUrl?: string;
   githubUrl?: string;
