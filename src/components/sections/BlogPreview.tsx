@@ -30,7 +30,7 @@ const posts = [
 
 export default function BlogPreview() {
   return (
-    <SectionFadeIn>
+
       <section className="py-16">
         <div className="space-y-6">
           <p className="text-[0.72rem] font-semibold uppercase tracking-[0.2em] text-accent">
@@ -53,7 +53,6 @@ export default function BlogPreview() {
           </div>
         </div>
       </section>
-    </SectionFadeIn>
   );
 }
 

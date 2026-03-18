@@ -1,18 +1,18 @@
 import Link from "next/link";
-import type { Project } from "../../data/projects";
+import type { ProjectMeta } from "@/lib/projects";
 
 interface ProjectCardProps {
-  project: Project;
+  project: ProjectMeta;
 }
 
 export function ProjectCard({ project }: ProjectCardProps) {
   return (
     <article className="group relative flex flex-col overflow-hidden rounded-2xl border border-border/70 bg-card shadow-[0_18px_40px_rgba(0,0,0,0.04)] transition-transform transition-shadow duration-150 hover:-translate-y-1 hover:shadow-[0_22px_50px_rgba(0,0,0,0.08)]">
-      {/* Stretched link covers the whole card — sits below the action row */}
+      {/* Stretched link covers the whole card */}
       {project.slug && (
         <Link
           href={`/projects/${project.slug}`}
-          className="absolute inset-0 z-0"
+          className="absolute inset-0 z-10"
           aria-label={`View ${project.title}`}
         />
       )}
@@ -21,7 +21,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
         <div className="flex aspect-video items-center justify-center text-xs text-tertiary-foreground">
           Project thumbnail
         </div>
-        {project.featured && (
+        {(
           <span className="absolute left-3 top-3 rounded-full bg-accent px-3 py-1 text-[0.65rem] font-medium uppercase tracking-[0.16em] text-white shadow-sm">
             Featured
           </span>
@@ -33,7 +33,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
           {project.title}
         </h3>
         <p className="mt-2 text-[0.8rem] leading-relaxed text-muted-foreground">
-          {project.description}
+          {project.subtitle}
         </p>
 
         <div className="mt-4 flex flex-wrap gap-2">
@@ -49,7 +49,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
       </div>
 
       {(project.liveUrl || project.githubUrl) && (
-        <div className="relative z-10 flex items-center justify-between border-t border-border/60 px-5 py-3 text-[0.75rem] font-medium text-accent">
+        <div className="relative z-20 flex items-center justify-between border-t border-border/60 px-5 py-3 text-[0.75rem] font-medium text-accent">
           <div className="flex gap-4">
             {project.liveUrl && (
               <Link

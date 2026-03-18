@@ -1,9 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
-import { SectionFadeIn } from "./SectionFadeIn";
+
 export default function About() {
   return (
-    <SectionFadeIn>
       <section className="py-16">
         <div className="space-y-8">
           <div className="space-y-3">
@@ -52,7 +51,6 @@ export default function About() {
           </div>
         </div>
       </section>
-    </SectionFadeIn>
   );
 }
 

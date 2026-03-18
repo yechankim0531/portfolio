@@ -1,70 +1,42 @@
-"use client";
- 
-import { motion } from "framer-motion";
- 
-const fade = (delay: number = 0) => ({
-  initial: { opacity: 0, y: 16 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, margin: "-40px" },
-  transition: { duration: 0.6, delay },
-});
- 
 export default function AboutA() {
   return (
     <article className="pb-28 pt-32">
       {/* ── Page header ── */}
       <header className="mx-auto max-w-2xl text-center">
-        <motion.p
-          {...fade()}
-          className="text-[11px] font-medium uppercase tracking-[0.25em] text-muted-foreground/50"
-        >
+        <p className="text-[11px] font-medium uppercase tracking-[0.25em] text-muted-foreground/50">
           About
-        </motion.p>
-        <motion.h1
-          {...fade(0.05)}
+        </p>
+        <h1
           className="font-heading mt-4 text-4xl tracking-tight text-foreground sm:text-5xl"
           style={{ lineHeight: 1.1 }}
         >
           The story so far
-        </motion.h1>
-        <motion.div
-          {...fade(0.1)}
-          className="mx-auto mt-6 h-px w-12 bg-border/60"
-        />
+        </h1>
+        <div className="mx-auto mt-6 h-px w-12 bg-border/60" />
       </header>
  
       {/* ── Profile photo ── */}
-      <motion.div
-        {...fade(0.15)}
-        className="mx-auto mt-14 max-w-xs overflow-hidden rounded-2xl"
-      >
+      <div className="mx-auto mt-14 max-w-xs overflow-hidden rounded-2xl">
         <img
           src="/images/yechan_barcelona.jpeg"
           alt="Portrait of Yechan Kim"
           className="h-72 w-full object-cover"
         />
-      </motion.div>
+      </div>
  
       {/* ── Section 1: My Story ── */}
       <section className="mx-auto mt-20 max-w-2xl">
-        <motion.h2
-          {...fade()}
+        <h2
           className="font-heading text-2xl tracking-tight text-foreground sm:text-3xl"
           style={{ fontStyle: "italic" }}
         >
           My Story
-        </motion.h2>
-        <motion.p
-          {...fade(0.03)}
-          className="mt-2 text-[11px] font-medium uppercase tracking-[0.2em] text-accent"
-        >
+        </h2>
+        <p className="mt-2 text-[11px] font-medium uppercase tracking-[0.2em] text-accent">
           01
-        </motion.p>
+        </p>
  
-        <motion.div
-          {...fade(0.08)}
-          className="mt-8 space-y-5 text-[0.98rem] leading-[1.75] text-muted-foreground md:text-[1.05rem]"
-        >
+        <div className="mt-8 space-y-5 text-[0.98rem] leading-[1.75] text-muted-foreground md:text-[1.05rem]">
           <p>
             I moved every three years growing up in Georgia, Jakarta, Seoul,
             Virginia. Each time I had to adapt, make new friends, and reinvent
@@ -90,31 +62,24 @@ export default function AboutA() {
             markets work — together, they give me the hands to build and the
             eyes to see what&apos;s worth building.
           </p>
-        </motion.div>
+        </div>
       </section>
  
       <div className="mx-auto my-16 h-px w-16 bg-border/40" />
  
       {/* ── Section 2: Experience ── */}
       <section className="mx-auto max-w-2xl">
-        <motion.h2
-          {...fade()}
+        <h2
           className="font-heading text-2xl tracking-tight text-foreground sm:text-3xl"
           style={{ fontStyle: "italic" }}
         >
           Experience
-        </motion.h2>
-        <motion.p
-          {...fade(0.03)}
-          className="mt-2 text-[11px] font-medium uppercase tracking-[0.2em] text-accent"
-        >
+        </h2>
+        <p className="mt-2 text-[11px] font-medium uppercase tracking-[0.2em] text-accent">
           02
-        </motion.p>
+        </p>
  
-        <motion.div
-          {...fade(0.08)}
-          className="mt-8 space-y-5 text-[0.98rem] leading-[1.75] text-muted-foreground md:text-[1.05rem]"
-        >
+        <div className="mt-8 space-y-5 text-[0.98rem] leading-[1.75] text-muted-foreground md:text-[1.05rem]">
           <p>
             I&apos;m a fourth year at UVA double majoring in CS and Economics.
             Outside class, I play club baseball, build AI solutions for local
@@ -133,31 +98,24 @@ export default function AboutA() {
             entrepreneur who continuously invents. Software is the tool. The
             product is the point.
           </p>
-        </motion.div>
+        </div>
       </section>
  
       <div className="mx-auto my-16 h-px w-16 bg-border/40" />
  
       {/* ── Section 3: Life & Interests ── */}
       <section className="mx-auto max-w-2xl">
-        <motion.h2
-          {...fade()}
+        <h2
           className="font-heading text-2xl tracking-tight text-foreground sm:text-3xl"
           style={{ fontStyle: "italic" }}
         >
           Life &amp; Interests
-        </motion.h2>
-        <motion.p
-          {...fade(0.03)}
-          className="mt-2 text-[11px] font-medium uppercase tracking-[0.2em] text-accent"
-        >
+        </h2>
+        <p className="mt-2 text-[11px] font-medium uppercase tracking-[0.2em] text-accent">
           03
-        </motion.p>
+        </p>
  
-        <motion.div
-          {...fade(0.08)}
-          className="mt-8 space-y-5 text-[0.98rem] leading-[1.75] text-muted-foreground md:text-[1.05rem]"
-        >
+        <div className="mt-8 space-y-5 text-[0.98rem] leading-[1.75] text-muted-foreground md:text-[1.05rem]">
           <p>
             Sports have been a constant through every move and every chapter.
             Baseball was my first love, I grew up playing it and I&apos;m still
@@ -172,33 +130,26 @@ export default function AboutA() {
             niche cuisine I haven&apos;t experienced yet. Every meal is a chance
             to try something new.
           </p>
-        </motion.div>
+        </div>
       </section>
  
       <div className="mx-auto my-16 h-px w-16 bg-border/40" />
  
       {/* ── Section 4: Resume ── */}
       <section className="mx-auto max-w-2xl text-center">
-        <motion.h2
-          {...fade()}
+        <h2
           className="font-heading text-2xl tracking-tight text-foreground sm:text-3xl"
           style={{ fontStyle: "italic" }}
         >
           Resume
-        </motion.h2>
-        <motion.p
-          {...fade(0.03)}
-          className="mt-2 text-[11px] font-medium uppercase tracking-[0.2em] text-accent"
-        >
+        </h2>
+        <p className="mt-2 text-[11px] font-medium uppercase tracking-[0.2em] text-accent">
           04
-        </motion.p>
+        </p>
  
-        <motion.p
-          {...fade(0.08)}
-          className="mt-6 text-[0.98rem] leading-relaxed text-muted-foreground"
-        >
+        <p className="mt-6 text-[0.98rem] leading-relaxed text-muted-foreground">
           Want the full picture? See my resume below.
-        </motion.p>
+        </p>
  
         <section className="mx-auto max-w-3xl">
   {/* Heading / copy as you already have it */}
