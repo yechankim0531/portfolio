@@ -3,14 +3,14 @@ export default function AboutA() {
     <article className="pb-28 pt-32">
       {/* ── Page header ── */}
       <header className="mx-auto max-w-2xl text-center">
-        <p className="text-[11px] font-medium uppercase tracking-[0.25em] text-muted-foreground/50">
+        <p className="font-mono text-[11px] font-medium uppercase tracking-[0.25em] text-muted-foreground/50">
           About
         </p>
         <h1
           className="font-heading mt-4 text-4xl tracking-tight text-foreground sm:text-5xl"
           style={{ lineHeight: 1.1 }}
         >
-          The story so far
+          The Story So Far
         </h1>
         <div className="mx-auto mt-6 h-px w-12 bg-border/60" />
       </header>
@@ -59,7 +59,7 @@ export default function AboutA() {
             I chose Computer Science (UVA School of Engineering) because no
             other skill lets you go from zero to a working product as fast. I
             paired it with Economics to build a mental model of how value and
-            markets work — together, they give me the hands to build and the
+            markets work. Together, they give me the hands to build and the
             eyes to see what&apos;s worth building.
           </p>
         </div>
@@ -75,7 +75,7 @@ export default function AboutA() {
         >
           Experience
         </h2>
-        <p className="mt-2 text-[11px] font-medium uppercase tracking-[0.2em] text-accent">
+        <p className="font-mono mt-2 text-[11px] font-medium uppercase tracking-[0.2em] text-accent">
           02
         </p>
  
@@ -111,7 +111,7 @@ export default function AboutA() {
         >
           Life &amp; Interests
         </h2>
-        <p className="mt-2 text-[11px] font-medium uppercase tracking-[0.2em] text-accent">
+        <p className="font-mono mt-2 text-[11px] font-medium uppercase tracking-[0.2em] text-accent">
           03
         </p>
  
@@ -143,7 +143,7 @@ export default function AboutA() {
         >
           Resume
         </h2>
-        <p className="mt-2 text-[11px] font-medium uppercase tracking-[0.2em] text-accent">
+        <p className="font-mono mt-2 text-[11px] font-medium uppercase tracking-[0.2em] text-accent">
           04
         </p>
  

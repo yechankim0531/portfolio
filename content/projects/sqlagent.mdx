@@ -1,0 +1,122 @@
+---
+title: "Business Intelligence SQL Agent"
+subtitle: "An AI agent that converts natural language questions into SQL queries and generates business insights"
+date: "2025-08-01"
+category: "AI/ML"
+role: "AI Developer, IBM"
+tags: ["Python", "LangGraph", "PostgreSQL", "Docker", "AI Orchestration"]
+githubUrl: "https://github.com/yechankim0531/sqlagent"
+heroImage: "/images/projects/sqlagent/sqlagent.png"
+showHeroImage: false
+order: 1
+highlights:
+  - label: "Real adoption"
+    description: "Deployed internally at IBM and adopted by 20+ employees, automating analytics workflows for consultants and business analysts."
+  - label: "Multi-agent architecture"
+    description: "Built a three-agent pipeline using LangGraph — Planner, Executor, and Analyst — each with a distinct role in the query lifecycle."
+  - label: "Zero-config setup"
+    description: "Just provide a database connection string and the agent handles the rest — it discovers your schema automatically and adapts to any database structure."
+---
+
+## Why I built this
+
+At IBM, I kept seeing the same problem. Consultants and business analysts on my team needed data insights but couldn't write SQL. 
+
+I was already learning about AI agent orchestration that summer with my team, so I thought: why not just let people ask their questions in plain English and have an agent handle the SQL part? 
+It was an opportuntity for me to try the skills I have learned myself. 
+
+## What it does
+
+You can ask any question about the data and the agent figures out the rest ranging from deciding what sql quereies to generate and how to analyze the data. 
+
+Here's what it actually looks like. You type in a business question:
+
+```
+🤖 Business Intelligence SQL Planner & Executor
+Complete Workflow: Planning → Execution → Analysis
+======================================================================
+
+What is your business question? (or 'quit' to exit):
+What are the top 5 customers by total order value?
+```
+
+The agent looks at your database schema, figures out which tables and joins it needs, and writes the SQL:
+
+```
+📋 STEP 1: CREATING SQL PLAN
+----------------------------------------
+✅ Plan created successfully!
+📊 Database Schema Retrieved
+   Generated 1 SQL steps
+
+Step 1: Get top 5 customers by total order value
+SQL: SELECT c.customer_name, SUM(o.total_amount) as total_order_value
+     FROM customers c
+     JOIN orders o ON c.customer_id = o.customer_id
+     GROUP BY c.customer_id, c.customer_name
+     ORDER BY total_order_value DESC
+     LIMIT 5;
+```
+
+Runs it:
+
+```
+🔧 STEP 2: EXECUTING SQL QUERIES
+----------------------------------------
+✅ Execution completed! 1 steps executed.
+```
+
+Then instead of just giving you raw rows, it actually analyzes the results and tells you what it means:
+
+```
+🧠 STEP 3: BUSINESS INTELLIGENCE ANALYSIS
+----------------------------------------
+📊 COMPLETE BUSINESS INTELLIGENCE REPORT
+======================================================================
+
+🎯 BUSINESS ANALYSIS & INSIGHTS
+======================================================================
+
+Top 5 Customers by Total Order Value:
+1. John Smith - $15,750
+2. Sarah Johnson - $12,300
+3. Michael Brown - $9,800
+4. Emily Davis - $8,450
+5. David Wilson - $7,200
+
+Key Observations:
+- The top customer (John Smith) accounts for 23% of total revenue
+- Top 5 customers represent 78% of total order value
+- Average order value among top customers: $10,700
+
+Recommendations:
+- Implement VIP programs for top-tier customers
+- Develop targeted marketing campaigns for high-value customers
+- Consider loyalty rewards for customers approaching the top tier
+```
+
+This isn't just text-to-SQL. The agent thinks in steps. If a question needs multiple queries or complex joins, it breaks it down into a plan first before running anything.
+
+## How it works
+
+Three agents, each with one job:
+
+**Planner** — reads your database schema and creates a step-by-step SQL execution plan based on the question.
+
+**Executor** — takes the plan and runs the queries. Handles multi-step chains and errors.
+
+**Analyst** — looks at the results and writes a business intelligence report with observations and recommendations.
+
+They're orchestrated with LangGraph. I used Gemini with low temperature for SQL generation because you want consistency there, not creativity. The analysis phase gets a bit more freedom.
+
+## The Easy Setup
+
+This was important to me. I didn't want people to need an engineer to set it up. All you do is give the agent a database connection link. It discovers your schema automatically, understands the table relationships, and adapts. No config files, no schema mapping.
+
+That's why 20+ people at IBM actually used it. The onboarding was literally: here's the tool, paste your DB link, start asking questions.
+
+## What I learned
+
+This was my first standalone AI Agent Orchestration project.  Getting three agents to pass state properly, handling weird edge cases like malformed SQL or empty results, and still giving clean output required some engineering.
+
+Biggest takeaway: build for problems you've actually seen people struggle with. I watched my team waste time on this every week. When the tool solves real pain, people use it. 

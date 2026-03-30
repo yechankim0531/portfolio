@@ -1,0 +1,64 @@
+---
+title: "YouTube Content Mod"
+subtitle: "A custom YouTube feed builder that lets you create keyword-based categories with weighted priorities — so you control what you watch instead of letting the algorithm decide."
+date: "2025-07-01"
+category: "Frontend"
+role: "Solo Developer"
+tags: ["React", "TypeScript", "Node.js", "YouTube Data API"]
+githubUrl: "https://github.com/yechankim0531/youtube_content_mod"
+heroImage: "/images/projects/youtube/content-mod-sports-feed.png"
+showHeroImage: false
+order: 4
+highlights:
+  - label: "Weighted keywords"
+    description: "Each category has keywords with percentage weights — set Baseball to 40% and Formula 1 to 10%, and your feed reflects that mix. Not just what you want, but how much of each."
+  - label: "Instant feed switching"
+    description: "One click to go from sports to music to tech. No algorithm retraining, no waiting, no second Google account."
+  - label: "YouTube-native UI"
+    description: "Looks and feels like YouTube — video grid, playback page with related videos sidebar, keyword tags on each result. Familiar layout, different engine underneath."
+---
+
+## Why I built this
+
+YouTube's recommendation algorithm is a black box you can't control. You can like videos, watch more of what you want, skip what you don't — and your feed still takes days to shift. Sometimes it never does.
+
+I kept running into the same thing. Watch some brainrot before bed — just dumb stuff to turn my brain off — and the next morning my entire feed is brainrot. I wanted news. I wanted basketball highlights. Instead I'm getting recommended the exact content I watched for 20 minutes the night before.
+
+It's not just me. A friend of mine literally made multiple Google accounts to deal with this. One for tech content, one for sports, one for everything else. That's how bad the problem is — people are creating entire accounts just to get different recommendations.
+
+So I built something simpler. You define categories with weighted keywords, and the app pulls YouTube videos matching those keywords in the proportions you set. Want mostly baseball with a little F1? Set the weights. Switch to music whenever. No algorithm training, no waiting, no second account.
+
+## How it works
+
+You start with an empty feed and a sidebar for categories.
+
+![Home screen with categories sidebar and empty feed](/images/projects/youtube/content-mod-home.png)
+
+Hit the + button to create a category. Each one gets a title, keywords, and weights. The weights are percentages that control how much of each keyword shows up in your feed. Here I'm making a Sports category — 40% Baseball, 25% Golf, 25% Tennis, 10% Formula 1.
+
+![Creating a Sports category with weighted keywords](/images/projects/youtube/content-mod-create-category.png)
+
+Hit "Load Videos" on a category and the feed fills up. The app queries the YouTube Data API using your keywords and pulls results proportional to the weights. 40% Baseball means roughly 40% of the videos are baseball content. Each video gets tagged with which keyword it matched.
+
+![Sports feed showing baseball, F1, and tennis videos with keyword tags](/images/projects/youtube/content-mod-sports-feed.png)
+
+Click a video and you get a playback page with a related videos sidebar — all still filtered to your category.
+
+![Video playback page with related sports videos sidebar](/images/projects/youtube/content-mod-playback.png)
+
+Switch to a different category and the whole feed changes. Here's the same app loaded with Music — rock, jazz, classical, pop, all weighted differently.
+
+![Music feed with jazz, classical, rock, and pop videos](/images/projects/youtube/content-mod-music-feed.png)
+
+Scroll down and hit "Load More" for additional results. The weights stay consistent.
+
+![Music feed scrolled down with Load More button](/images/projects/youtube/content-mod-music-more.png)
+
+## The real problem
+
+This isn't just a YouTube thing. TikTok, Instagram Reels, YouTube Shorts — same issue. The for-you page is built around what you watched recently, not what you want right now. Short-form content moves fast, and the same stuff gets repetitive even faster.
+
+Users don't have a way to say "I want this type of content right now." The only lever you get is your watch history, and that's a slow, blunt tool. I wanted something direct.
+
+
+---

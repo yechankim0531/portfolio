@@ -14,7 +14,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: -8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
-          className="mb-8 text-[11px] font-medium uppercase tracking-[0.25em] text-muted-foreground/60"
+          className="font-mono mb-8 text-[11px] font-medium uppercase tracking-[0.25em] text-muted-foreground/60"
         >
           Georgia → Jakarta → Seoul → Virginia
         </motion.p>
@@ -44,8 +44,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: "easeOut", delay: 0.3 }}
-          className="max-w-md text-lg italic leading-relaxed text-muted-foreground sm:text-xl md:text-[1.35rem]"
-          style={{ fontFamily: "var(--font-serif, Georgia, serif)" }}
+          className="font-heading max-w-md text-lg italic leading-relaxed text-muted-foreground sm:text-xl md:text-[1.35rem]"
         >
           &ldquo;Ideas without action are meaningless.&rdquo;
         </motion.p>
@@ -55,7 +54,7 @@ export default function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, ease: "easeOut", delay: 0.45 }}
-          className="mt-8 text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground/50"
+          className="font-mono mt-8 text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground/50"
         >
           Inventor{" "}
           <span className="mx-2 text-border">/</span> Entrepreneur{" "}
@@ -68,7 +67,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 6 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, ease: "easeOut", delay: 0.55 }}
-            className="mt-7 inline-flex items-center gap-2 rounded-full border border-accent/30 bg-[color:var(--accent-soft)] px-4 py-1.5 text-[11px] font-medium text-accent"
+            className="font-mono mt-7 inline-flex items-center gap-2 rounded-full border border-accent/30 bg-[color:var(--accent-soft)] px-4 py-1.5 text-[11px] font-medium text-accent"
           >
             <span className="relative inline-flex h-1.5 w-1.5">
               <span className="absolute inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500 opacity-75" />
@@ -86,8 +85,8 @@ export default function Hero() {
           className="mt-10 flex flex-wrap justify-center gap-3"
         >
           <a
-            href="#projects"
-            className="inline-flex items-center justify-center rounded-xl border border-foreground/80 bg-foreground px-6 py-2.5 text-sm font-medium text-background transition-all duration-150 hover:-translate-y-0.5 hover:bg-foreground/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+            href="/projects"
+            className="inline-flex items-center justify-center rounded-xl border border-foreground/80 bg-foreground px-6 py-2.5 text-sm font-medium text-background transition-colors duration-150 hover:border-foreground/60 hover:bg-[color-mix(in_srgb,var(--foreground)_78%,white)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background dark:hover:bg-[color-mix(in_srgb,var(--foreground)_88%,black)]"
           >
             View my work →
           </a>

@@ -1,0 +1,90 @@
+---
+title: "Agent Token (TGP)"
+subtitle: "A trust and authentication layer for AI agents — so they can securely access APIs and tools without exposing raw credentials. Think Visa, but for autonomous agents making API calls."
+date: "2025-07-01"
+category: "AI/ML"
+role: "Solo Developer"
+tags: ["FastAPI", "Next.js", "TypeScript", "Python", "PostgreSQL", "JWT", "ECDSA", "Cryptography"]
+githubUrl: "https://github.com/yechankim0531/agent_token"
+order: 5
+highlights:
+  - label: "Scoped JWT tokens"
+    description: "Agents never send their master key during execution. They get short-lived, scoped tokens tied to a specific tool and action — like a one-time credit card number."
+  - label: "Cryptographic request signing"
+    description: "Every agent request is signed with ECDSA secp256k1. The tool verifies the signature before doing anything. No valid signature, no access."
+  - label: "Agent identity system"
+    description: "Each agent gets a UUID, a keypair, and an Agent Authentication Number. The gateway uses these to issue tokens, log actions, and enforce permissions."
+---
+
+## Why I built this
+
+AI agents are getting good at reasoning. They're not good at doing things. The moment an agent needs to call an API — send an email, book a reservation, pull data from a service — it hits the same wall every time: authentication.
+
+Right now the standard approach is to hand the agent a raw API key and hope for the best. That's how most agent frameworks do it. The key sits in a config file or environment variable, gets passed around in plaintext, and if anything goes wrong you revoke it and start over. There's no scoping, no expiration, no way to limit what the agent can do with that key.
+
+I kept thinking about how credit cards solve this for humans. You don't hand a merchant your bank account number. Visa sits in the middle — it verifies your identity, authorizes a specific transaction, and the merchant never sees your actual credentials. Agents need the same thing.
+
+So I started building it. I call it the Tool Gateway Protocol — TGP. It's the trust layer between agents and the tools they want to use.
+
+> I have a longer writeup on the full vision and business model behind this. This page covers what I actually built. The blog post covers where I think this goes.
+
+## What I built
+
+The core of TGP: agent registration, identity management, scoped token issuance, and cryptographic request verification.
+
+**Agent identity system** — When an agent is created, it gets a UUID, an ECDSA secp256k1 keypair, and a master API key stored in a secure vault. The UUID is the agent's identity across every interaction. The master key never leaves the vault during normal operation.
+
+**Token issuance** — When an agent wants to use a tool, it requests a scoped JWT from the gateway. The token is tied to the agent's UUID, limited to a specific tool and action, and expires in minutes. The agent uses this token instead of its master key.
+
+**Request signing and verification** — The agent signs every request with its private key. The gateway (or the tool itself) verifies the signature against the agent's registered public key. This prevents replay attacks and ensures the request actually came from the agent it claims to be.
+
+**Dashboard** — A Next.js frontend where users can register, create agents, generate master keys, and manage their agent identities.
+
+## The Visa analogy
+
+The easiest way to understand the architecture:
+
+- **Agents** are cardholders
+- **Tools/APIs** are merchants
+- **TGP** is the Visa network
+- **Master API Key** is your bank account number (never shared directly)
+- **Scoped JWT** is the transaction-specific card number (temporary, limited, verifiable)
+
+A merchant doesn't need to trust the cardholder. They trust Visa. Same idea here — a tool doesn't need to trust the agent. It trusts TGP.
+
+## How a request flows
+
+1. Agent decides it needs to call a tool (say, send an email)
+2. Agent requests a scoped token from TGP — provides its master key, the tool ID, and the action
+3. TGP verifies the agent's identity and permissions, issues a short-lived JWT
+4. Agent signs the request with its private key and sends it with the JWT
+5. Tool (or TGP proxy) verifies the JWT signature, checks expiry and scope, validates the cryptographic signature
+6. If everything checks out, the request goes through. If not, rejected.
+
+The agent's master key was only used once — in step 2, over a secure channel to TGP. The tool never sees it.
+
+## Tech stack
+
+**Backend:** FastAPI, SQLAlchemy, PostgreSQL, Alembic for migrations. Handles agent registration, key management, token issuance, and request verification.
+
+**Frontend:** Next.js 14 with TypeScript and Tailwind. Dashboard for managing agents and tokens.
+
+**Agent SDK:** Python library that handles key generation (ECDSA secp256k1), request signing, and token management. This is what an agent developer would actually import and use.
+
+**Database:** PostgreSQL with tables for users, agent identities, master keys, and AAN mappings.
+
+## What's not built yet
+
+This is the foundation — the authentication and trust layer. The bigger vision has two more pieces:
+
+**Centralized Tool Base (CTB)** — a searchable registry where agents can discover available tools, check their schemas, and see auth requirements. Think npm or GitHub but for agent-compatible APIs.
+
+**Agent runtime and orchestration** — the full personal agent platform where agents can chain tools together, maintain memory, and act on goals autonomously.
+
+I wrote about the full roadmap and business model in a separate blog post. This project is Phase 2 of that plan — the transaction layer. Phase 1 (tool discovery) and Phase 3 (agent orchestration) are next.
+
+## What I learned
+
+The hardest part wasn't the cryptography — ECDSA signing is well-documented and the Python `cryptography` library handles it cleanly. The hard part was designing the permission model. What scopes should a token have? How granular? Per-tool, per-action, per-resource? I went with tool + action for now, but there's a real design space here that gets complicated fast.
+
+The other thing I took away: this problem is going to get solved by someone. Agents are getting more capable every month, and right now every framework handles auth differently — or doesn't handle it at all. There's no standard. OAuth was the answer for user-to-app trust. Something like TGP could be the answer for agent-to-tool trust.

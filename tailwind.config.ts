@@ -4,7 +4,6 @@ const config: Config = {
   content: [
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/content/**/*.{md,mdx}",
   ],
   theme: {
     extend: {
@@ -31,7 +30,9 @@ const config: Config = {
       },
       fontFamily: {
         sans: ["var(--font-sans)", "system-ui", "sans-serif"],
-        heading: ["var(--font-heading)", "serif"],
+        heading: ["var(--font-heading)", "Georgia", "serif"],
+        display: ["var(--font-heading)", "Georgia", "serif"],
+        mono: ["var(--font-mono)", "ui-monospace", "monospace"],
       },
     },
   },

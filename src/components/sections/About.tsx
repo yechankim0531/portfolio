@@ -43,10 +43,14 @@ export default function About() {
           <div className="flex justify-end">
             <Link
               href="/about"
-              className="inline-flex items-center rounded-xl bg-accent px-4 py-2 text-sm font-medium text-white shadow-sm transition-transform transition-shadow duration-150 hover:-translate-y-0.5 hover:bg-[color:var(--accent-hover)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+              className="group inline-flex items-center rounded-xl bg-accent px-4 py-2 text-sm font-medium text-white shadow-sm transition-colors duration-150 hover:bg-[color:var(--accent-hover)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
             >
-              <span>Learn more</span>
-              <span className="ml-2">→</span>
+              <span className="transition-colors duration-150 group-hover:text-background-secondary">
+                Learn more
+              </span>
+              <span className="ml-2 transition-colors duration-150 group-hover:text-background-secondary">
+                →
+              </span>
             </Link>
           </div>
         </div>

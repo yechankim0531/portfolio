@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
+import { parseFrontmatterDate } from "./date-utils";
 
 const PROJECTS_DIR = path.join(process.cwd(), "content/projects");
 
@@ -8,10 +9,12 @@ export interface ProjectFrontmatter {
   title: string;
   subtitle?: string;
   date: string;
+  category?: string;
   tags: string[];
   liveUrl?: string;
   githubUrl?: string;
   heroImage?: string;
+  showHeroImage?: boolean;
   highlights?: { title: string; description: string }[];
 }
 
@@ -48,5 +51,9 @@ export function getAllProjects(): ProjectMeta[] {
       const { content: _content, ...meta } = getProject(slug);
       return meta;
     })
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+    .sort(
+      (a, b) =>
+        parseFrontmatterDate(b.date).getTime() -
+        parseFrontmatterDate(a.date).getTime(),
+    );
 }

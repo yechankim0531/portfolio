@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { DM_Sans, DM_Serif_Display } from "next/font/google";
+import { DM_Sans, DM_Serif_Display, Space_Mono } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import "./globals.css";
 import { siteConfig } from "../data/siteConfig";
@@ -12,7 +12,14 @@ const dmSans = DM_Sans({
   variable: "--font-sans",
 });
 
-const dmSerif = DM_Serif_Display({
+const spaceMono = Space_Mono({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-mono",
+  weight: ["400", "700"],
+});
+
+const dmSerifDisplay = DM_Serif_Display({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-heading",
@@ -38,7 +45,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${dmSans.variable} ${dmSerif.variable} font-sans antialiased`}>
+      <body className={`${dmSans.variable} ${spaceMono.variable} ${dmSerifDisplay.variable} font-sans antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <div className="min-h-screen flex flex-col bg-background text-foreground">
             <Navbar />

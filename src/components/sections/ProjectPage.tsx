@@ -2,6 +2,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import type { ProjectFrontmatter } from "@/lib/projects";
+import { parseFrontmatterDate } from "@/lib/date-utils";
 
 interface ProjectPageProps {
   frontmatter: ProjectFrontmatter;
@@ -17,10 +18,11 @@ export default function ProjectPage({ frontmatter, children }: ProjectPageProps)
     liveUrl,
     githubUrl,
     heroImage,
+    showHeroImage,
     highlights,
   } = frontmatter;
 
-  const formattedDate = new Date(date).toLocaleDateString("en-US", {
+  const formattedDate = parseFrontmatterDate(date).toLocaleDateString("en-US", {
     year: "numeric",
     month: "long",
   });
@@ -104,8 +106,8 @@ export default function ProjectPage({ frontmatter, children }: ProjectPageProps)
         </div>
       )}
 
-      {/* Hero image */}
-      {heroImage && (
+      {/* Hero image (optional per project) */}
+      {heroImage && (showHeroImage ?? true) && (
         <div className="mt-10 overflow-hidden rounded-2xl border border-border/60">
           <Image
             src={heroImage}

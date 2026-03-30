@@ -1,0 +1,82 @@
+---
+title: "Branching Conversations for LLMs"
+subtitle: "A proposal for non-linear chat interfaces that let users explore tangents without losing context or cluttering the main thread."
+date: "2026-03-07"
+category: "Product/Business"
+tags: ["LLM", "UX Design", "Product Strategy", "Conversational AI"]
+---
+
+## Problem
+
+LLM conversations are currently linear. Users ask questions and receive responses in a single thread. However, real exploration is rarely linear. When working with an LLM, users frequently encounter tangents or follow-up questions that are not directly related to the main discussion.
+
+Example: A user researching the NFL media market may encounter a reference to how sports media rights are structured. The user may want to briefly explore how media markets work more broadly before returning to the NFL discussion.
+
+Today, the interface forces two options:
+
+**Continue inside the same conversation and clutter the thread.** This mixes unrelated questions into the main discussion, making the conversation harder to follow and forcing users to scroll through large amounts of text to recover important points.
+
+**Start a new chat and lose context.** This preserves clarity but removes the surrounding discussion that led to the question, requiring users to recreate context manually.
+
+Both options interrupt the user's thinking process and slow down exploration. More importantly, the current interface does not align with how people actually learn. Learning and problem solving involve exploring ideas, asking side questions, and briefly investigating related concepts before returning to the main topic. A strictly linear chat structure forces users to either suppress these explorations or fragment them across multiple conversations.
+
+As a result, the current design limits how effectively LLM can support knowledge discovery. Instead of helping users rapidly explore ideas and build understanding, the interface introduces friction that slows down the learning process. A system designed to accelerate knowledge discovery should support branching exploration rather than forcing strictly linear conversations.
+
+This proposal introduces Branching Conversations, which allow users to create temporary conversation branches from any point in the chat. These branches enable users to explore tangents while preserving the structure and clarity of the main discussion.
+
+---
+
+## Proposed Solution
+
+Introduce Branching Conversations, a feature that allows users to explore tangential questions without disrupting the main discussion.
+
+Instead of forcing conversations into a single linear thread, LLM allows users to create temporary branches from any message. A branch acts as a parallel exploration path that inherits the context of the conversation at the branching point while evolving independently.
+
+This allows users to investigate side questions, clarify concepts, or test ideas without cluttering the main discussion.
+
+---
+
+## User Flow
+
+### Create a Branch
+
+Users can create a branch from any message in the conversation. When the user hovers over a message or highlights a section of text, a contextual option labeled "Branch Conversation" appears. Selecting this option creates a new branch starting from that message. The branch inherits the full conversation context up to that point. This allows the user to explore a tangent without altering the structure of the main thread.
+
+<figure>
+  <img
+    src="/images/blog/llm_branch/picture2.png"
+    alt="Community detail page showing members, events, files, and chat"
+  />
+
+</figure>
+### Branch Workspace
+
+Once a branch is created, LLM opens a branch workspace that allows users to interact with the branch while referencing the main conversation.
+
+Users can choose between two viewing modes:
+
+**Split View:** The main conversation appears on the left and the branch appears on the right. This allows users to reference the original discussion while exploring the tangent.
+
+**Focused View:** The branch conversation expands to occupy the full workspace. The main thread remains accessible via a tab or navigation panel.
+
+Branches are labeled and can be renamed to reflect the topic being explored.
+
+<figure>
+  <img
+    src="/images/blog/llm_branch/picture1.png"
+    alt="Community detail page showing members, events, files, and chat"
+  />
+ 
+</figure>
+
+### Branch Exploration
+
+Inside the branch, the user can ask questions and explore ideas normally. The branch maintains all prior conversation context but evolves independently from the main thread. Messages in the branch do not appear in the main conversation unless explicitly merged. This keeps the primary discussion focused while allowing deeper exploration when needed. Users can create more branches within the branch. At any time, users can switch between parent and child branches and ask questions.
+
+Branches appear as sub-conversations within the current chat session. Users can:
+
+- Rename branches
+- Switch between branches
+- Reopen previous branches
+- Maintain multiple branches for different tangents
+- Close the branch and choose merge memory or delete

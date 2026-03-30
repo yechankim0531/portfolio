@@ -5,9 +5,13 @@ export default function ProjectsPage() {
   const projects = getAllProjects();
 
   return (
-    <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-      <Projects projects={projects} title="All projects" />
+    <div className="mx-auto max-w-5xl">
+      <Projects
+        projects={projects}
+        title="Projects"
+        subtitle="Things I've built, broken, and learned from."
+        variant="page"
+      />
     </div>
   );
 }
-

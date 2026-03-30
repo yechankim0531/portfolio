@@ -36,8 +36,8 @@ export default function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`text-sm transition-colors hover:text-accent ${
-                  isActive ? "text-accent" : "text-muted-foreground"
+                className={`font-mono text-sm transition-colors hover:text-accent ${
+                  isActive ? "text-accent font-semibold" : "text-muted-foreground"
                 }`}
               >
                 {link.label}
@@ -93,7 +93,7 @@ export default function Navbar() {
                     key={link.href}
                     href={link.href}
                     onClick={handleNavClick}
-                    className="rounded-lg px-2 py-2 text-base text-foreground/90 transition-colors hover:bg-muted hover:text-foreground"
+                    className="font-mono rounded-lg px-2 py-2 text-base text-foreground/90 transition-colors hover:bg-muted hover:text-foreground"
                   >
                     {link.label}
                   </Link>

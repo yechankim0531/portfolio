@@ -1,0 +1,99 @@
+---
+title: "Agent Roundtable"
+subtitle: "A group chat app where you create AI agents with custom personas and let them debate, discuss, and challenge each other — so you get multiple perspectives on any topic."
+date: "2025-07-01"
+category: "AI/ML"
+role: "Solo Developer"
+tags: ["React", "TypeScript", "Python", "Tailwind CSS", "Vite", "AI Agents"]
+githubUrl: "https://github.com/yechankim0531/agent_roundtable"
+heroImage: "/images/projects/roundtable/roundtable-debate.png"
+showHeroImage: false
+order: 3
+highlights:
+  - label: "Custom personas"
+    description: "Each AI agent gets a name, role, and detailed background that shapes how they think and argue — a behavioral economist responds very differently than a Silicon Valley founder."
+  - label: "Multi-agent conversations"
+    description: "Agents don't just respond to you. They respond to each other, debate, push back, and build on arguments — like a real group discussion."
+  - label: "@ mentions"
+    description: "You can direct questions to specific agents mid-conversation using @ mentions, steering the discussion wherever you want it to go."
+---
+ 
+## Why I built this
+ 
+When you talk to ChatGPT or any AI chatbot, you get one perspective. It's a conversation between you and one voice. That's fine for a lot of things, but sometimes you need to hear different sides. We all have biases, and a single AI response doesn't really challenge them — it just gives you one more opinion to agree or disagree with.
+ 
+I wanted something different. What if instead of a 1-on-1 chat, you could set up a room full of people with completely different backgrounds and viewpoints, throw out a question, and watch them go at it? Not just answering you — actually debating each other, pushing back, bringing up things the other missed.
+ 
+That's Agent Roundtable. You create AI agents with custom personas, add them to a roundtable, and start a conversation. They discuss, argue, and respond to each other based on who they are.
+ 
+## How it works
+ 
+You start by creating a roundtable — basically a group chat with a topic. In the screenshots, the topic is "Future of AI."
+ 
+![Creating a new roundtable called Future of AI](/images/projects/roundtable/roundtable-create.png)
+ 
+Then you add AI agents. Each agent gets a name, role, and a detailed persona. For example:
+ 
+- **Dr. Econ** — a behavioral economist from the University of Chicago who's skeptical of techno-optimism and centers working-class impact in every argument
+- **Mr. Founder** — a Silicon Valley entrepreneur and VC investor who believes technology always creates more than it destroys
+
+
+![Adding Dr. Econ as an AI agent with name, role, and background persona](/images/projects/roundtable/roundtable-add-dr-econ.png)
+ 
+Once your agents are in the room, you ask a question and they start talking. Not just to you — to each other. Ask "Will AI create more jobs than it destroys over the next 20 years?" and Dr. Econ will push back on Mr. Founder's techno-optimism while Mr. Founder argues that market forces handle disruption better than policy ever could.
+ 
+![Agents debating AI's impact on jobs with opposing viewpoints](/images/projects/roundtable/roundtable-debate.png)
+ 
+You can also jump in and steer the conversation. Use @ mentions to direct a question at a specific agent — like asking Dr. Econ directly whether it's ethical for companies like OpenAI to profit while displacing workers. The agent responds in character, and the conversation keeps going.
+ 
+ 
+## Use cases
+ 
+The "Future of AI" debate is just one example. Where this gets really useful is when you're building something. Say you're designing a new product. You could set up a roundtable with:
+ 
+- A product manager who thinks about user experience
+- A business analyst focused on market fit
+- A finance person running the numbers
+- An engineer thinking about technical feasibility
+ 
+Ask them "Should we build feature X?" and you get four different angles in one conversation. Way more useful than asking one chatbot the same question four times.
+
+## Full workflow
+ 
+ 
+### 1. Messages screen
+![Empty messages screen](/images/projects/roundtable/roundtable-messages-empty.png)
+ 
+### 2. Create a roundtable
+![New roundtable creation modal](/images/projects/roundtable/roundtable-create.png)
+ 
+### 3. Empty chat room
+![Empty chat room for Future of AI](/images/projects/roundtable/roundtable-chat-empty.png)
+ 
+### 4. Open participants panel
+![Participants sidebar with Add AI Agent button](/images/projects/roundtable/roundtable-participants-empty.png)
+ 
+### 5. Add Dr. Econ
+![Adding Dr. Econ as a behavioral economist](/images/projects/roundtable/roundtable-add-dr-econ.png)
+ 
+### 6. Add Mr. Founder
+![Adding Mr. Founder as a Silicon Valley entrepreneur](/images/projects/roundtable/roundtable-add-mr-founder.png)
+ 
+### 7. Both agents added
+![Participants sidebar showing both agents](/images/projects/roundtable/roundtable-participants-full.png)
+ 
+### 8. Ask a question
+![User asks a question, agents are thinking](/images/projects/roundtable/roundtable-thinking.png)
+ 
+### 9. Agents debate
+![Dr. Econ and Mr. Founder debating](/images/projects/roundtable/roundtable-debate.png)
+ 
+### 10. @ mention an agent
+![@ mention dropdown for directing questions](/images/projects/roundtable/roundtable-mention.png)
+ 
+### 11. Agent responds to direct question
+![Dr. Econ responding to a directed question about ethics](/images/projects/roundtable/roundtable-mention-response.png)
+ 
+### 12. Messages list with active roundtable
+![Messages screen showing the active roundtable](/images/projects/roundtable/roundtable-messages-active.png)
+ 

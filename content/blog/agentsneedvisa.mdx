@@ -1,0 +1,172 @@
+---
+title: "Agents Need a MCP Visa Network"
+subtitle: "The product and business case for building trust infrastructure between AI agents and the tools they use."
+date: "2025-07-14"
+category: "Product/Business"
+tags: ["AI Agents", "Infrastructure", "Product Strategy", "Business"]
+---
+
+## The bet
+
+I believe everyone will have a personal AI agent within the next few years. Not a chatbot — an agent that actually does things for you. Books restaurants, manages your calendar, handles emails, buys stuff, monitors your investments. The kind of assistant that operates in the background and only pings you when it needs a decision.
+
+The models are getting there. Reasoning is improving fast. But there's a problem nobody is really solving yet: how does an agent securely interact with the outside world?
+
+Right now, the answer is "hand it an API key and hope for the best." That's not infrastructure. That's duct tape.
+
+This post lays out what I think the real infrastructure looks like, why it's a massive business opportunity, and how I'd build it in phases.
+
+---
+
+## The problem: APIs were built for humans
+
+Every API you use today was designed with a human developer in mind. You sign up, get an API key, read the docs, write some code, and make requests. That workflow assumes a human is making decisions at every step — which tools to use, what permissions to grant, when to rotate keys.
+
+Agents can't do that. Or rather, they can't do it safely.
+
+Here's what breaks when you give an agent direct API access:
+
+**No scoped identity.** An API key is all-or-nothing. If an agent has your Gmail API key, it can read every email, send as you, delete your inbox. There's no way to say "you can send emails but not read them" at the key level.
+
+**No trust model between parties.** When an agent calls a third-party tool, that tool has no way to verify who the agent is, who it's acting on behalf of, or whether it has permission to do what it's asking. The tool just sees a valid API key.
+
+**No discovery.** If an agent wants to find a tool to book a restaurant, where does it look? There's no registry. No searchable catalog. No standardized way to say "here's what this tool does, here's its schema, here's how to authenticate."
+
+**No audit trail.** When something goes wrong — and it will — there's no log of which agent did what, with which permissions, at what time. Just a raw API key tied to your account.
+
+This is why most "autonomous" agents today still require a human in the loop for anything that matters. The trust infrastructure doesn't exist.
+
+---
+
+## The mental model: Visa for agents
+
+The easiest way to think about what's needed is the credit card network.
+
+When you swipe your card at a restaurant, you don't hand the waiter your bank account number. A whole system sits in between. Visa verifies your identity, checks your balance, authorizes a specific transaction for a specific amount, and the merchant never touches your actual credentials. If the card gets stolen, you cancel it. Your bank account is fine.
+
+Agents need the same architecture.
+
+- **The agent** is the cardholder
+- **The tool or API** is the merchant
+- **The gateway** is the Visa network
+- **The master key** is your bank account number — stored securely, never shared directly
+- **The scoped token** is the transaction card — temporary, limited, and verifiable
+
+A tool doesn't need to trust the agent. It just needs to trust the gateway. That's the whole idea.
+
+---
+
+## The solution: TGP + CTB
+
+I'm building two things that work together.
+
+### Tool Gateway Protocol (TGP)
+
+TGP is the trust and transaction layer. It handles identity, authentication, and scoped access control for agents.
+
+When an agent wants to use a tool, the flow looks like this:
+
+1. The agent presents its master key to TGP over a secure channel
+2. TGP verifies the agent's identity and checks permissions
+3. TGP issues a short-lived JWT — scoped to a specific tool, a specific action, with an expiration measured in minutes
+4. The agent signs the request with its private key and sends it with the JWT
+5. The tool verifies the token and the cryptographic signature
+6. If valid, the request goes through. If not, rejected.
+
+The master key was only exposed once — to TGP. The tool never sees it. The token expires in minutes. If it leaks, the damage is limited to one tool, one action, one time window.
+
+Each agent gets a UUID, an ECDSA secp256k1 keypair, and an Agent Authentication Number (AAN). These are the building blocks of agent identity — used for token issuance, permission checks, logging, and rate limiting.
+
+### Centralized Tool Base (CTB)
+
+TGP handles the "how do agents authenticate" problem. CTB handles the "how do agents find tools" problem.
+
+CTB is a searchable registry of agent-compatible tools. Think of it like npm or the App Store, but for APIs that agents can use.
+
+Every tool in the registry has metadata: what it does, its input/output schema, what authentication it requires (API key, TGP, open), pricing, latency, reliability stats. Tools get ranked by usage, ratings, and verification status.
+
+An agent that needs to book a restaurant can query CTB, find the top-rated reservation tool, check its schema, request a scoped token from TGP, and make the call. No human intervention required.
+
+---
+
+## Why this is a business
+
+This isn't just a developer tool. It's a platform that sits at the center of every agent-to-tool interaction. That's a position with real leverage.
+
+### Where the money comes from
+
+**Transaction fees.** Every time an agent uses a tool through TGP, there's a transaction. Charge a small fee per call — exactly like Visa takes a percentage of every card swipe. The more agents there are, the more tools there are, the more transactions flow through.
+
+**Tool marketplace.** CTB becomes a marketplace where tool developers list their APIs. Premium listings, verified badges, analytics dashboards — all monetizable. This is the App Store model applied to agent tooling.
+
+**Usage-based metering.** Tools can set their own pricing (per-call, per-minute, subscription), and TGP handles the billing. Take a cut of every transaction as the payment rail.
+
+**Enterprise tier.** Companies that want to deploy internal agents on internal APIs need the same trust layer. Sell TGP as an on-prem or cloud deployment for enterprise agent infrastructure. Rate limiting, audit logs, compliance features, custom permission models.
+
+**Agent wallet / spend limits.** An agent acting on your behalf needs a budget. TGP can manage proxy wallets with spend limits per agent, per tool, per time period. This is a financial services product.
+
+### The defensibility
+
+The critical thing about platform businesses is that they get stronger with scale. The more tools in CTB, the more useful it is for agents. The more agents using TGP, the more tool developers want to integrate. Network effects on both sides.
+
+And the trust layer is sticky. Once a tool developer integrates with TGP for token verification, they're not going to rip it out for a competitor without a strong reason. Same with agent developers who build on the SDK. Switching costs are real.
+
+---
+
+## The phased roadmap
+
+You can't build all of this at once. The order matters.
+
+### Phase 1: Centralized Tool Base
+
+Build the tool registry first. This is the lowest-risk, highest-signal move.
+
+What you ship: an open platform where developers can upload tool wrappers with metadata. A searchable UI and API. A simple SDK for tool onboarding. Basic analytics and ratings.
+
+Why this goes first: it builds the developer community. It validates whether people actually want a centralized tool registry. It's useful even without TGP — developers and agent builders can discover and compare tools. And it seeds the catalog that makes Phase 2 valuable.
+
+Early revenue: featured tool listings, analytics dashboards for tool developers, verification badges.
+
+### Phase 2: Agent Identity + Transactions (TGP)
+
+Once there's a catalog of tools, launch the trust layer.
+
+What you ship: agent registration with UUID and keypairs. Scoped JWT issuance. Cryptographic request signing and verification. Rate limiting and abuse prevention. SDKs for both agent developers and tool developers.
+
+Why this goes second: the tool catalog from Phase 1 gives TGP an immediate set of tools to integrate with. Agent developers have a reason to use TGP from day one because the tools are already there.
+
+Revenue: usage-based API metering, per-transaction fees, premium verification for enterprise tools, agent spend limits.
+
+### Phase 3: Full Agent Platform
+
+Once the infrastructure is in place, build the runtime.
+
+What you ship: a hosted agent platform where consumers can deploy personal agents. Agent memory and persistent preferences. Orchestration logic — the agent breaks goals into tasks, discovers tools from CTB, authenticates via TGP, and executes. A consumer-facing UI to configure and manage your agent.
+
+Why this goes last: it requires both CTB (for tool discovery) and TGP (for secure execution) to work. Building it first would mean building everything at once, which is how projects die.
+
+Revenue: consumer subscriptions (B2C), enterprise orchestration licenses, revenue share with premium tools.
+
+---
+
+## What exists today
+
+I've built the core of Phase 2 — the TGP authentication layer. Agent registration, UUID-based identity, ECDSA keypair generation, master key vault, scoped JWT issuance, cryptographic request signing and verification. There's a FastAPI backend, a Next.js dashboard, and a Python SDK that agent developers can use to integrate.
+
+It's not finished. The CTB registry is next, and the full agent runtime is further out. But the hardest part — the trust model and the cryptographic foundation — is working.
+
+The project is open source: [github.com/yechankim0531/agent_token](https://github.com/yechankim0531/agent_token)
+
+---
+
+## The timing argument
+
+MCP (Model Context Protocol) is gaining traction. OpenAI and Google are building their own agent frameworks. Every major lab is pushing toward agents that can take action in the real world.
+
+But none of them are solving the trust layer in a universal, open way. MCP defines how agents talk to tools — it doesn't handle identity, authentication, scoped permissions, or billing. It's a transport protocol, not a trust protocol.
+
+There's a gap. The agent ecosystem is growing fast and the authentication infrastructure hasn't caught up. OAuth solved this for human-to-app trust twenty years ago. Something needs to solve it for agent-to-tool trust now.
+
+I think TGP + CTB could be that something. The models will keep getting better. The tools will keep multiplying. The missing piece is the trust layer in the middle.
+
+That's what I'm building.

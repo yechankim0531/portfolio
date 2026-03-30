@@ -1,16 +1,41 @@
-interface BlogPostPageProps {
-  params: {
-    slug: string;
-  };
+import { notFound } from "next/navigation";
+import type { Metadata } from "next";
+import { MDXRemote } from "next-mdx-remote/rsc";
+import { getPost, getBlogSlugs } from "@/lib/blog";
+import BlogPostPage from "@/components/sections/BlogPostPage";
+import { mdxComponents } from "@/components/mdx-components";
+
+interface PageProps {
+  params: { slug: string };
 }
 
-export default function BlogPostPage({ params }: BlogPostPageProps) {
+export function generateStaticParams() {
+  return getBlogSlugs().map((slug) => ({ slug }));
+}
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  try {
+    const post = getPost(params.slug);
+    return {
+      title: post.title,
+      description: post.subtitle ?? post.excerpt,
+    };
+  } catch {
+    return {};
+  }
+}
+
+export default function BlogSlugPage({ params }: PageProps) {
+  let post;
+  try {
+    post = getPost(params.slug);
+  } catch {
+    notFound();
+  }
+
   return (
-    <div className="mx-auto flex min-h-[60vh] max-w-5xl items-center justify-center px-4 py-16 sm:px-6 lg:px-8">
-      <h1 className="text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
-        Blog Post
-      </h1>
-    </div>
+    <BlogPostPage frontmatter={post}>
+      <MDXRemote source={post.content} components={mdxComponents} />
+    </BlogPostPage>
   );
 }
-
