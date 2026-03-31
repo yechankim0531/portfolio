@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export default function AboutA() {
   return (
     <article className="pb-28 pt-32">
@@ -16,11 +18,14 @@ export default function AboutA() {
       </header>
  
       {/* ── Profile photo ── */}
-      <div className="mx-auto mt-14 max-w-xs overflow-hidden rounded-2xl">
-        <img
+      <div className="relative mx-auto mt-14 h-72 max-w-xs overflow-hidden rounded-2xl">
+        <Image
           src="/images/yechan_barcelona.jpeg"
           alt="Portrait of Yechan Kim"
-          className="h-72 w-full object-cover"
+          fill
+          sizes="(max-width: 20rem) 100vw, 20rem"
+          className="object-cover"
+          priority
         />
       </div>
  
@@ -119,7 +124,7 @@ export default function AboutA() {
           <p>
             Sports have been a constant through every move and every chapter.
             Baseball was my first love, I grew up playing it and I&apos;m still
-            a die hard Dodgers fan. I also love watching college football, and I&apos;m a Georgia Bulldogs fan. I haven't missed a single Goergia football game since 2017.
+            a die hard Dodgers fan. I also love watching college football, and I&apos;m a Georgia Bulldogs fan. I haven&apos;t missed a single Georgia football game since 2017.
             These days
             I&apos;ve picked up golf and tennis.
           </p>

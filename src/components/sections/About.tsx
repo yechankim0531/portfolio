@@ -24,17 +24,17 @@ export default function About() {
 
               <div className="space-y-5 text-[0.95rem] leading-relaxed text-muted-foreground">
                 <p>
-                  I'm an inventor at heart with the skills of a software engineer and the mind of an entrepreneur. I love to build things that make a difference.
+                  I&apos;m an inventor at heart with the skills of a software engineer and the mind of an entrepreneur. I love to build things that make a difference.
                   I see opportunities where others see problems in their daily lives.
                 </p>
                 <p>
-                 I'm currently a fourth year student studying <strong className="text-foreground"> Computer Science </strong> 
+                 I&apos;m currently a fourth year student studying <strong className="text-foreground"> Computer Science </strong> 
                 
                   and <strong className="text-foreground"> Economics </strong> at the <strong className="text-foreground"> University of Virginia</strong>.
                 </p>
                 <p>
-                  Shaped by a life across Korea, Indonesia, and the U.S., I've spent my life adapting, learning, and building. 
-                  I've learned to think creatively and solve problems systematically.
+                  Shaped by a life across Korea, Indonesia, and the U.S., I&apos;ve spent my life adapting, learning, and building. 
+                  I&apos;ve learned to think creatively and solve problems systematically.
                 </p>
               </div>
             </div>
