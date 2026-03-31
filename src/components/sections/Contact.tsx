@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Github, Linkedin, Instagram } from "lucide-react";
+import { Github, Linkedin, Instagram, Mail } from "lucide-react";
 import { SectionFadeIn } from "./SectionFadeIn";
 import { siteConfig } from "../../data/siteConfig";
 
@@ -27,20 +27,13 @@ export default function Contact() {
               what you&apos;re building next.
             </p>
 
-            <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
-              <a
-                href={`mailto:${siteConfig.email}`}
-                className="inline-flex items-center justify-center rounded-xl bg-accent px-5 py-2.5 text-sm font-medium text-white shadow-[0_10px_30px_rgba(212,98,43,0.35)] transition-transform transition-shadow duration-150 hover:-translate-y-0.5 hover:bg-[color:var(--accent-hover)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-              >
-                Send me an email →
-              </a>
-              <button
-                type="button"
-                className="inline-flex items-center justify-center rounded-xl border border-border/70 bg-[color:var(--background-secondary)] px-5 py-2.5 text-sm font-medium text-foreground shadow-[0_4px_12px_rgba(0,0,0,0.02)] transition-colors duration-150 hover:bg-[color:var(--background-tertiary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-              >
-                Download resume
-              </button>
-            </div>
+            <a
+              href={`mailto:${siteConfig.email}`}
+              className="mt-6 inline-flex items-center justify-center gap-2.5 rounded-xl border border-border/70 bg-card/60 px-4 py-3 font-mono text-sm text-foreground transition-colors hover:border-accent/40 hover:bg-[color:var(--accent-soft)] hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+            >
+              <Mail className="h-5 w-5 shrink-0 text-accent" aria-hidden />
+              <span>{siteConfig.email}</span>
+            </a>
 
             <div className="mt-7 flex items-center justify-center gap-3">
               {socials.map(({ name, href, Icon }) => (
