@@ -99,8 +99,7 @@ export default function AboutA() {
             closer to the intersection of engineering and product.
           </p>
           <p className="font-medium text-foreground">
-            My goal isn&apos;t to be a software engineer. It&apos;s to be an
-            entrepreneur who continuously invents. Software is the tool. The
+            My goal is to be an entrepreneur, not just a software engineer. Software is the tool. The
             product is the point.
           </p>
         </div>
