@@ -137,10 +137,10 @@ export default function AboutA() {
         </div>
       </section>
  
-      <div className="mx-auto my-16 h-px w-16 bg-border/40" />
- 
+      {/* <div className="mx-auto my-16 h-px w-16 bg-border/40" /> */}
+
       {/* ── Section 4: Resume ── */}
-      <section className="mx-auto max-w-2xl text-center">
+      {/* <section className="mx-auto max-w-2xl text-center">
         <h2
           className="font-heading text-2xl tracking-tight text-foreground sm:text-3xl"
           style={{ fontStyle: "italic" }}
@@ -150,24 +150,21 @@ export default function AboutA() {
         <p className="font-mono mt-2 text-[11px] font-medium uppercase tracking-[0.2em] text-accent">
           04
         </p>
- 
+
         <p className="mt-6 text-[0.98rem] leading-relaxed text-muted-foreground">
           Want the full picture? See my resume below.
         </p>
- 
-        <section className="mx-auto max-w-3xl">
-  {/* Heading / copy as you already have it */}
-  {/* PDF preview */}
-  <div className="mt-8 overflow-hidden rounded-2xl border border-border/60 bg-card">
-    <iframe
-      src="/Yechan_Kim_SWE.pdf"
-      title="Resume preview"
-      className="h-[600px] w-full"
-    />
-  </div>
 
-</section>
-      </section>
+        <section className="mx-auto max-w-3xl">
+          <div className="mt-8 overflow-hidden rounded-2xl border border-border/60 bg-card">
+            <iframe
+              src="/Yechan_Kim_SWE.pdf"
+              title="Resume preview"
+              className="h-[600px] w-full"
+            />
+          </div>
+        </section>
+      </section> */}
     </article>
   );
 }

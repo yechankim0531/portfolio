@@ -13,7 +13,7 @@ export default function Footer() {
     <footer className="border-t border-border/50 bg-background/80">
       <div className="mx-auto flex max-w-5xl flex-col items-center justify-between gap-4 px-4 py-6 font-mono text-sm text-muted-foreground sm:flex-row sm:px-6 lg:px-8">
         <p className="text-center sm:text-left">
-          © 2025 {siteConfig.name}. All rights reserved.
+          © 2026 {siteConfig.name}. All rights reserved.
         </p>
         <div className="flex items-center gap-3">
           {socials.map(({ name, href, Icon }) => (

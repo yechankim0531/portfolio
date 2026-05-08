@@ -1,6 +1,6 @@
 export const siteConfig = {
   name: "Yechan Kim",
-  title: "Full-Stack Developer",
+  title: "",
   tagline: "Building things for the web.",
   email: "yechankim0531@gmail.com",
   openToWork: true,

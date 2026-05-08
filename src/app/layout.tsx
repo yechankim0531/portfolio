@@ -27,10 +27,10 @@ const dmSerifDisplay = DM_Serif_Display({
 });
 
 export const metadata: Metadata = {
-  title: `${siteConfig.name} · ${siteConfig.title}`,
+  title: siteConfig.name,
   description: siteConfig.tagline,
   openGraph: {
-    title: `${siteConfig.name} · ${siteConfig.title}`,
+    title: siteConfig.name,
     description: siteConfig.tagline,
     url: "https://example.com",
     siteName: siteConfig.name,

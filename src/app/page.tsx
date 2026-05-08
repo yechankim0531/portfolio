@@ -2,7 +2,6 @@ import Hero from "@/components/sections/Hero";
 import About from "@/components/sections/About";
 import Projects from "@/components/sections/Projects";
 import BlogPreview from "@/components/sections/BlogPreview";
-import Skills from "@/components/sections/Skills";
 import Contact from "@/components/sections/Contact";
 import { getAllProjects } from "@/lib/projects";
 import { getRecentPosts } from "@/lib/blog";
@@ -25,8 +24,6 @@ export default function HomePage() {
       <Projects projects={homeProjects} />
       <hr className="border-t border-border/70" />
       <BlogPreview posts={homeBlogPosts} />
-      <hr className="border-t border-border/70" />
-      <Skills />
       <hr className="border-t border-border/70" />
       <Contact />
     </div>
