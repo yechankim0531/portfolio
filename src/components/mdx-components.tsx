@@ -17,6 +17,14 @@ function SmallImg({ src, alt, caption, width = 220 }: { src: string; alt?: strin
   );
 }
 
+function PDFViewer({ src }: { src: string }) {
+  return (
+    <div className="my-6 overflow-hidden rounded-2xl border border-border/60" style={{ height: "800px" }}>
+      <iframe src={src} title="Research paper" className="h-full w-full" />
+    </div>
+  );
+}
+
 function Figure({ src, alt, caption }: { src: string; alt?: string; caption?: string }) {
   return (
     <span style={{ display: "block", marginBottom: "1.5rem" }}>
@@ -51,6 +59,7 @@ export const mdxComponents: MDXComponents = {
   SmallImg,
   ImageRow,
   Figure,
+  PDFViewer,
   table: ({ children }) => (
     <div className="my-6 overflow-x-auto">
       <table className="w-full border-collapse text-sm text-muted-foreground">
@@ -128,7 +137,7 @@ export const mdxComponents: MDXComponents = {
     </pre>
   ),
   hr: () => <hr className="my-8 border-border/50" />,
-  img: ({ src, alt, style, ...props }) =>
+  img: ({ src, alt, style, width: _w, height: _h, ...props }) =>
     src ? (
       <span className="my-6 block overflow-hidden rounded-2xl border border-border/60" style={style as React.CSSProperties}>
         <Image

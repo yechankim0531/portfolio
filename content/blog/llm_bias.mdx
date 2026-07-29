@@ -1,0 +1,21 @@
+---
+title: "The Hidden Bias in Large Language Models"
+subtitle: "When 70% of training data is in English, the model doesn't reflect the world — it reflects one version of it."
+date: "2025-09-10"
+category: "Opinion"
+tags: ["AI", "LLMs", "Bias", "Opinion"]
+---
+
+Roughly 70% of the data used to train large language models is in English, with Chinese sources accounting for around 2%. For a technology being positioned as a universal intelligence layer, that is a striking imbalance. Some of it is structural — the Great Firewall limits accessible Chinese data, and English dominates the open web. But the imbalance is real regardless of the cause, and it has consequences that are not being talked about enough.
+
+LLMs work by calculating probabilities across their training data. The most common ideas, framings, and perspectives surface most often in responses. If Western viewpoints dominate the training corpus, Western viewpoints dominate the answers — not because the model is explicitly programmed to favor them, but because they are statistically overrepresented. The same logic applies to what gets flagged as acceptable or unacceptable. Content moderation and safety filtering reflect cultural norms, and those norms are not universal. Conversations that would be unremarkable in one cultural context may be blocked in another, and vice versa.
+
+The gaps are not abstract. Korea's primary search engine is Naver, not Google. A significant portion of Korean knowledge, discourse, and culture lives there and is largely absent from Western LLM training sets. China has centuries of documented intellectual and scientific tradition that exists in Chinese, not in English translation. Other languages and regions have the same problem at varying scales. This is not a minor calibration issue — it means the model's worldview is structurally incomplete, reflecting the parts of the world that happened to document themselves in English on the open web.
+
+There is a reasonable analogy here: history is written by the winners. LLMs trained predominantly on English data risk encoding the same distortion at scale, presenting a particular cultural and historical perspective as the default understanding of events where multiple legitimate perspectives exist.
+
+This raises a genuine design question. Should the goal be a single multilingual model trained across as many cultural and linguistic corpora as possible — one that can think from diverse viewpoints simultaneously? Or is it better to develop multiple models, each trained primarily within one cultural and linguistic context, that can then be combined or compared? The first approach risks losing the depth of individual traditions in the process of averaging across them. The second risks fragmentation and the creation of AI systems that are, by design, culturally isolated from each other.
+
+My view is that the multilingual approach is the right long-term goal, but only if the training actually represents the diversity of sources rather than just adding more English-adjacent data. The current trajectory — where English dominates, Western platforms dominate, and the Chinese internet is largely inaccessible — is producing models that present themselves as universal while reflecting a narrow slice of global knowledge. That gap will matter more as these models become more embedded in how people learn, decide, and understand the world.
+
+Transparency is also overdue. There are no clear standards requiring AI companies to disclose what training data was used, in what proportions, or what filtering was applied. For a technology people interact with daily and increasingly treat as authoritative, that is a significant accountability gap. Understanding what an LLM was trained on is foundational to evaluating how much to trust what it says.

@@ -27,14 +27,36 @@ const dmSerifDisplay = DM_Serif_Display({
 });
 
 export const metadata: Metadata = {
-  title: siteConfig.name,
-  description: siteConfig.tagline,
+  metadataBase: new URL(siteConfig.url),
+  title: {
+    default: siteConfig.title,
+    template: `%s | Yechan Kim`,
+  },
+  description: siteConfig.description,
+  keywords: ["Yechan Kim", "software engineer", "entrepreneur", "UVA", "AI", "product", "blog"],
+  authors: [{ name: "Yechan Kim", url: siteConfig.url }],
+  creator: "Yechan Kim",
   openGraph: {
-    title: siteConfig.name,
-    description: siteConfig.tagline,
-    url: "https://example.com",
-    siteName: siteConfig.name,
+    title: siteConfig.title,
+    description: siteConfig.description,
+    url: siteConfig.url,
+    siteName: "Yechan Kim",
     type: "website",
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: siteConfig.title,
+    description: siteConfig.description,
+    creator: "@yechankim",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true },
+  },
+  alternates: {
+    canonical: siteConfig.url,
   },
 };
 

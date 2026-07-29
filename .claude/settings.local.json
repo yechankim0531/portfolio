@@ -1,7 +1,9 @@
 {
   "permissions": {
     "allow": [
-      "Bash(cd \"C:/Users/maque/OneDrive/Desktop/Projects/portfolio\" && npm install remark-gfm --save)"
+      "Bash(cd \"C:/Users/maque/OneDrive/Desktop/Projects/portfolio\" && npm install remark-gfm --save)",
+      "Bash(grep -E \"^\\(date|category\\):\" C:/Users/maque/OneDrive/Desktop/Projects/portfolio/content/blog/*.mdx)",
+      "Bash(grep -L \"^date:\" C:/Users/maque/OneDrive/Desktop/Projects/portfolio/content/blog/*.mdx)"
     ]
   }
 }
