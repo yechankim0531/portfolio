@@ -1,7 +1,78 @@
 import type { MDXComponents } from "mdx/types";
 import Image from "next/image";
+import React from "react";
+
+function SmallImg({ src, alt, caption, width = 220 }: { src: string; alt?: string; caption?: string; width?: number }) {
+  return (
+    <span style={{ display: "inline-block", width, flexShrink: 0 }}>
+      <span className="block overflow-hidden rounded-2xl border border-border/60">
+        <Image src={src} alt={alt ?? ""} width={600} height={900} className="w-full object-cover" />
+      </span>
+      {caption && (
+        <span style={{ display: "block", marginTop: "0.5rem", fontSize: "0.75rem", color: "var(--muted-foreground)", lineHeight: 1.4 }}>
+          {caption}
+        </span>
+      )}
+    </span>
+  );
+}
+
+function Figure({ src, alt, caption }: { src: string; alt?: string; caption?: string }) {
+  return (
+    <span style={{ display: "block", marginBottom: "1.5rem" }}>
+      <span className="block overflow-hidden rounded-2xl border border-border/60">
+        <Image src={src} alt={alt ?? ""} width={1200} height={675} className="w-full object-cover" />
+      </span>
+      {caption && (
+        <span style={{ display: "block", marginTop: "0.5rem", fontSize: "0.75rem", color: "var(--muted-foreground)", lineHeight: 1.4 }}>
+          {caption}
+        </span>
+      )}
+    </span>
+  );
+}
+
+function ImageRow({ children, caption }: { children: React.ReactNode; caption?: string }) {
+  return (
+    <div style={{ marginBottom: "1.5rem" }}>
+      <div style={{ display: "flex", gap: "1rem", alignItems: "flex-start" }}>
+        {children}
+      </div>
+      {caption && (
+        <p style={{ marginTop: "0.5rem", fontSize: "0.75rem", color: "var(--muted-foreground)", lineHeight: 1.4 }}>
+          {caption}
+        </p>
+      )}
+    </div>
+  );
+}
 
 export const mdxComponents: MDXComponents = {
+  SmallImg,
+  ImageRow,
+  Figure,
+  table: ({ children }) => (
+    <div className="my-6 overflow-x-auto">
+      <table className="w-full border-collapse text-sm text-muted-foreground">
+        {children}
+      </table>
+    </div>
+  ),
+  thead: ({ children }) => (
+    <thead className="border-b border-border/60 text-foreground">{children}</thead>
+  ),
+  tbody: ({ children }) => <tbody>{children}</tbody>,
+  tr: ({ children }) => (
+    <tr className="border-b border-border/40 last:border-0">{children}</tr>
+  ),
+  th: ({ children }) => (
+    <th className="py-2 pr-6 text-left text-xs font-semibold uppercase tracking-wide text-foreground">
+      {children}
+    </th>
+  ),
+  td: ({ children }) => (
+    <td className="py-2 pr-6 leading-snug">{children}</td>
+  ),
   h1: ({ children }) => (
     <h1 className="font-heading mt-10 mb-4 text-3xl tracking-tight text-foreground sm:text-4xl">
       {children}
@@ -57,18 +128,24 @@ export const mdxComponents: MDXComponents = {
     </pre>
   ),
   hr: () => <hr className="my-8 border-border/50" />,
-  img: ({ src, alt }) =>
+  img: ({ src, alt, style, ...props }) =>
     src ? (
-      <span className="my-6 block overflow-hidden rounded-2xl border border-border/60">
+      <span className="my-6 block overflow-hidden rounded-2xl border border-border/60" style={style as React.CSSProperties}>
         <Image
           src={src}
           alt={alt ?? ""}
           width={1200}
           height={675}
           className="w-full object-cover"
+          {...props}
         />
       </span>
     ) : null,
+  figcaption: ({ children }) => (
+    <figcaption className="mt-2 text-xs leading-snug text-muted-foreground">
+      {children}
+    </figcaption>
+  ),
   strong: ({ children }) => (
     <strong className="font-semibold text-foreground">{children}</strong>
   ),

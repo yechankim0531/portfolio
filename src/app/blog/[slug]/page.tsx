@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { MDXRemote } from "next-mdx-remote/rsc";
+import remarkGfm from "remark-gfm";
 import { getPost, getBlogSlugs } from "@/lib/blog";
 import BlogPostPage from "@/components/sections/BlogPostPage";
 import { mdxComponents } from "@/components/mdx-components";
@@ -35,7 +36,7 @@ export default function BlogSlugPage({ params }: PageProps) {
 
   return (
     <BlogPostPage frontmatter={post}>
-      <MDXRemote source={post.content} components={mdxComponents} />
+      <MDXRemote source={post.content} components={mdxComponents} options={{ mdxOptions: { remarkPlugins: [remarkGfm] } }} />
     </BlogPostPage>
   );
 }

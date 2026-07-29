@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cd \"C:/Users/maque/OneDrive/Desktop/Projects/portfolio\" && npm install remark-gfm --save)"
+    ]
+  }
+}

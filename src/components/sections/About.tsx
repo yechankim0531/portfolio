@@ -28,9 +28,8 @@ export default function About() {
                   I see opportunities where others see problems in their daily lives.
                 </p>
                 <p>
-                 I&apos;m currently a fourth year student studying <strong className="text-foreground"> Computer Science </strong> 
-                
-                  and <strong className="text-foreground"> Economics </strong> at the <strong className="text-foreground"> University of Virginia</strong>.
+                  I&apos;m a recent graduate with a degree in <strong className="text-foreground"> Computer Science </strong>
+                  and <strong className="text-foreground"> Economics </strong> from the <strong className="text-foreground"> University of Virginia</strong>.
                 </p>
                 <p>
                   Shaped by a life across Korea, Indonesia, and the U.S., I&apos;ve spent my life adapting, learning, and building. 

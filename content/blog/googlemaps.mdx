@@ -1,0 +1,88 @@
+---
+title: "Making 'Add a Stop' Consistent in Google Maps"
+subtitle: "A mini case study in interaction design."
+date: "2026-07-29"
+category: "UX Design"
+tags: ["UX", "Google Maps", "Interaction Design", "Case Study"]
+---
+
+## Overview
+
+One of the most common things a driver needs is a stop on the way. Gas before the highway stretch. A rest stop two hours in. Coffee, a bathroom, food somewhere between here and the destination. The defining trait of this task is that the driver doesn't know the address. They know the brand or the category, and they know roughly when they'll want it. What they actually need from the map is an answer to one question: which of these is worth pulling off for, and how much time will it cost me?
+
+There are three ways to do this in Google Maps today.
+
+- Add a stop on mobile, before driving (planning the trip on your phone and inserting a stop into the route).
+- Ask by voice, mid-drive (already navigating and asking out loud for a McDonald's on the way).
+- Add a stop on desktop (planning at a computer and typing a stop into the route builder).
+
+All three should answer the same question. None of them fully does, and each falls short in a different place.
+
+**On mobile,** results are shown well when the stop is inserted between two points already connected. You see the route and the places sitting along it. But add that same stop after the destination is already set, and the route line vanishes. You're left with two clumps of pins, one near where you started and one near where you're going, with nothing tying them together and no sense of which is a short detour versus a long one.
+
+<ImageRow caption="Left: stop inserted between two connected points, route line and on-corridor results present. Right: same search with stop added after destination, route gone and two disconnected pin clusters.">
+  <SmallImg src="/images/blog/googlemaps/mcdonalds_in.PNG" alt="McDonald's search with route line visible" />
+  <SmallImg src="/images/blog/googlemaps/mcdonalds_in_result.PNG" alt="McDonald's search results filtered to corridor" />
+</ImageRow>
+
+<ImageRow caption="Stop added after destination is already set. No route line, pins split near origin and destination with no corridor context.">
+  <SmallImg src="/images/blog/googlemaps/mcdonalds_out.PNG" alt="McDonald's search after destination set, no route line" />
+  <SmallImg src="/images/blog/googlemaps/mcdonalds_out_result.PNG" alt="McDonald's results showing two disconnected pin clusters" />
+</ImageRow>
+
+**By voice,** the map finally tells you what each option costs: "adds 3 minutes." That's exactly the right answer. But the places it offers are clustered near the start and the end of the trip, so the ones actually along the middle of the drive, which is where a driver usually wants to stop, don't show up.
+
+<SmallImg src="/images/blog/googlemaps/voice.png" alt="Voice navigation showing detour badges with wrong candidate set" caption="Voice during navigation. The added-time label is correct, but candidates cluster at the trip endpoints rather than along the middle of the route." />
+
+**On desktop,** nothing is drawn at all. Typing a stop returns a plain list of addresses with no pins on the map, no route, and no sense of which one is nearby or convenient.
+
+<Figure src="/images/blog/googlemaps/desktop.png" alt="Desktop middle-stop search showing plain text list" caption="Desktop. Typing a stop returns a plain text list with no pins, no route, and no sense of what's convenient." />
+
+The unexpected part is that the fixes already exist. Showing places along the route exists. Telling you how much time a stop adds exists. They're just in different places, and none of them appear together. As a user, I only found them by deliberately working through every version of the task and comparing what each one returned, something no ordinary driver would ever do. A capability the user has to reverse-engineer isn't really shipped, and asking someone to do that is not user experience design.
+
+> The problem isn't missing technology. It's that existing technology is split across modes, so no driver ever sees the complete experience.
+
+---
+
+## The Problem
+
+Three things make this task work: seeing your route for context, seeing places that are genuinely along it, and knowing how much time each one adds. Google has built all three. No single way of adding a stop has all three.
+
+| Flow | Route | On-corridor results | Added time |
+|------|-------|---------------------|------------|
+| Mobile, inserted between two points | Yes | Yes | No |
+| Mobile, added after destination | No | No | No |
+| Voice, during navigation | Yes | No (endpoints only) | Yes |
+| Desktop | No | No | No |
+
+A driver who learns how this works in one place is actively misled the next time they try it somewhere else. That is the definition of an inconsistent interaction model, and it's why these features stayed invisible to me until I went hunting for them.
+
+---
+
+## The Solution
+
+One principle resolves all of it: adding a stop should work the same way everywhere, regardless of where the stop goes, how you ask for it, or what device you're on. Always show the route, always show places along it, always say what it costs. Four changes make that concrete.
+
+1. **Persistent route reference.** Your established route stays fully visible at all times. When a stop is being considered, the new leg it would add is drawn dimmed on top of it, so you can always tell the route you've committed to apart from the detour you're evaluating.
+
+2. **Bucketed results.** Group options into Near Start, On the Way, and Near Destination instead of one undifferentiated cluster of pins. This turns an ambiguous cloud into a labeled, scannable list and makes it obvious at a glance whether there are any real mid-drive options.
+
+3. **Added time everywhere.** Show the "Adds X min" label on every option in every flow, not just during active navigation. That number matters most while planning, when the driver is still weighing choices, and it should be what results are sorted by rather than raw distance.
+
+4. **Tap-to-preview.** Tapping an option temporarily draws the route as it would be with that stop included, so the real detour is visible before committing. This replaces today's add-it, look, remove-it loop.
+
+Every one of these already exists somewhere in the product. The design work isn't inventing them. It's making them the default everywhere instead of mode-specific exceptions, which is also what finally makes them discoverable.
+
+---
+
+## Prototype
+
+<Figure src="/images/blog/googlemaps/solution.png" alt="Proposed unified add-stop experience" caption="Proposed unified add-stop experience: persistent route with dimmed detour leg, bucketed results, added-time labels, and tap-to-preview." />
+
+---
+
+## Next Steps
+
+- Extend the prototype across all three entry points to prove the pattern holds no matter how the stop is added.
+- Build a clickable version of tap-to-preview, the highest-novelty interaction here and the one that needs to be felt rather than described.
+- Validate the grouping labels (Near Start, On the Way, Near Destination) with drivers to confirm they match how people actually reason about detours.

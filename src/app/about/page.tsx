@@ -86,9 +86,9 @@ export default function AboutA() {
  
         <div className="mt-8 space-y-5 text-[0.98rem] leading-[1.75] text-muted-foreground md:text-[1.05rem]">
           <p>
-            I&apos;m a fourth year at UVA double majoring in CS and Economics.
-            Outside class, I play club baseball, build AI solutions for local
-            businesses through the Business and AI Institute, and I&apos;m
+            I&apos;m a recent graduate from UVA with a double major in CS and Economics.
+            During my time there, I played club baseball, built AI solutions for local
+            businesses through the Business and AI Institute, and was
             active in Greek life.
           </p>
           <p>
